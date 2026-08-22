@@ -8,8 +8,8 @@ use std::time::{SystemTime, UNIX_EPOCH};
 
 use anyhow::bail;
 use chrono::{DateTime, Days, Local};
-use cosmic::config::CosmicTk;
-use cosmic::theme::CosmicTheme;
+use lingmo::config::CosmicTk;
+use lingmo::theme::CosmicTheme;
 use cosmic_config::CosmicConfigEntry;
 use cosmic_theme::{Theme, ThemeMode};
 
