@@ -847,7 +847,7 @@ source = "git+https://github.com/Matrinsoft/liblingmo#5d94314ca5b3f0e44cf19b7892
 dependencies = [
  "atomicwrites",
  "cosmic-config-derive",
- "cosmic-settings-daemon 0.1.0 (git+https://github.com/pop-os/dbus-settings-bindings)",
+ "cosmic-settings-daemon 0.1.0 (git+https://github.com/Matrinsoft/dbus-settings-bindings)",
  "dirs",
  "futures-util",
  "iced_futures",
@@ -872,7 +872,7 @@ dependencies = [
 [[package]]
 name = "cosmic-dbus-a11y"
 version = "0.1.0"
-source = "git+https://github.com/pop-os/dbus-settings-bindings#eed01dd3609e90e3c8cd043656734c500956c793"
+source = "git+https://github.com/Matrinsoft/dbus-settings-bindings#eed01dd3609e90e3c8cd043656734c500956c793"
 dependencies = [
  "zbus",
 ]
@@ -1020,7 +1020,7 @@ dependencies = [
 [[package]]
 name = "cosmic-settings-daemon"
 version = "0.1.0"
-source = "git+https://github.com/pop-os/dbus-settings-bindings#eed01dd3609e90e3c8cd043656734c500956c793"
+source = "git+https://github.com/Matrinsoft/dbus-settings-bindings#eed01dd3609e90e3c8cd043656734c500956c793"
 dependencies = [
  "zbus",
 ]
@@ -3073,7 +3073,7 @@ dependencies = [
  "auto_enums",
  "cosmic-config",
  "cosmic-freedesktop-icons",
- "cosmic-settings-daemon 0.1.0 (git+https://github.com/pop-os/dbus-settings-bindings)",
+ "cosmic-settings-daemon 0.1.0 (git+https://github.com/Matrinsoft/dbus-settings-bindings)",
  "cosmic-theme",
  "css-color",
  "derive_setters",
@@ -3221,7 +3221,7 @@ checksum = "11d3d7f243d5c5a8b9bb5d6dd2b1602c0cb0b9db1621bafc7ed66e35ff9fe092"
 [[package]]
 name = "locale1"
 version = "0.1.0"
-source = "git+https://github.com/pop-os/dbus-settings-bindings#eed01dd3609e90e3c8cd043656734c500956c793"
+source = "git+https://github.com/Matrinsoft/dbus-settings-bindings#eed01dd3609e90e3c8cd043656734c500956c793"
 dependencies = [
  "zbus",
 ]
@@ -5786,7 +5786,7 @@ checksum = "8ecb6da28b8a351d773b68d5825ac39017e680750f980f3a1a85cd8dd28a47c1"
 [[package]]
 name = "upower_dbus"
 version = "0.3.2"
-source = "git+https://github.com/pop-os/dbus-settings-bindings#eed01dd3609e90e3c8cd043656734c500956c793"
+source = "git+https://github.com/Matrinsoft/dbus-settings-bindings#eed01dd3609e90e3c8cd043656734c500956c793"
 dependencies = [
  "serde",
  "serde_repr",
