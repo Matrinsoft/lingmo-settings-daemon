@@ -47,7 +47,7 @@ mod wayland;
 
 pub static ID_COUNTER: AtomicU64 = AtomicU64::new(0);
 
-static DBUS_NAME: &str = "com.system76.CosmicSettingsDaemon";
+static DBUS_NAME: &str = "com.lingmoos.LingmoSettingsDaemon";
 static DBUS_PATH: &str = "/com/system76/CosmicSettingsDaemon";
 
 struct SettingsDaemon {
@@ -83,7 +83,7 @@ impl Config {
     }
 }
 
-#[zbus::interface(name = "com.system76.CosmicSettingsDaemon.Config")]
+#[zbus::interface(name = "com.lingmoos.LingmoSettingsDaemon.Config")]
 impl Config {
     #[zbus(signal)]
     async fn changed(emitter: &SignalEmitter<'_>, id: String, key: String) -> zbus::Result<()>;
@@ -119,13 +119,13 @@ impl Config {
             "Config"
         };
         if let Ok(name) = WellKnownName::try_from(format!(
-            "com.system76.CosmicSettingsDaemon.{cfg_type}.{id}.V{version}",
+            "com.lingmoos.LingmoSettingsDaemon.{cfg_type}.{id}.V{version}",
         )) {
             name
         } else {
             let next_id = ID_COUNTER.fetch_add(1, Ordering::SeqCst);
             WellKnownName::try_from(format!(
-                "com.system76.CosmicSettingsDaemon.{cfg_type}.C{next_id}.V{version}",
+                "com.lingmoos.LingmoSettingsDaemon.{cfg_type}.C{next_id}.V{version}",
             ))
             .unwrap()
         }
@@ -171,7 +171,7 @@ fn next_target_raw(raw: i32, max_raw: i32, dir: i8) -> i32 {
     }
 }
 
-#[zbus::interface(name = "com.system76.CosmicSettingsDaemon")]
+#[zbus::interface(name = "com.lingmoos.LingmoSettingsDaemon")]
 impl SettingsDaemon {
     #[zbus(property)]
     async fn display_brightness(&self) -> i32 {
@@ -706,13 +706,13 @@ async fn main() -> ExitCode {
                                 {
                                     log::error!("Failed to send dark theme update {err:?}");
                                 }
-                            } else if id.as_str() == locale::COSMIC_COMP_ID
-                                && key.as_str() == locale::COSMIC_COMP_XDG_KEY
+                            } else if id.as_str() == locale::LINGMO_COMP_ID
+                                && key.as_str() == locale::LINGMO_COMP_XDG_KEY
                             {
                                 if let Err(err) = xkb_tx.send(()).await {
                                     log::error!("Failed to send xkb layout update: {err:?}");
                                 }
-                            } else if id.as_str() == cosmic_settings_daemon_config::NAME {
+                            } else if id.as_str() == lingmo_settings_daemon_config::NAME {
                                 let mut daemon = varlink_daemon_context.lock().await;
 
                                 let mono_sound = daemon
@@ -795,7 +795,7 @@ async fn main() -> ExitCode {
         }
         1
     } else if let Err(why) = result {
-        eprintln!("cosmic-settings-daemon failed: {why}");
+        eprintln!("lingmo-settings-daemon failed: {why}");
         1
     } else {
         0
@@ -814,7 +814,7 @@ async fn watch_config_message_stream(
     let config_rule = MatchRule::builder()
         .msg_type(zbus::message::Type::MethodCall)
         .member("WatchConfig")?
-        .interface("com.system76.CosmicSettingsDaemon")?
+        .interface("com.lingmoos.LingmoSettingsDaemon")?
         .build();
     let config_stream = MessageStream::for_match_rule(config_rule, &conn, Some(100)).await?;
 
@@ -824,7 +824,7 @@ async fn watch_config_message_stream(
     let state_rule = MatchRule::builder()
         .msg_type(zbus::message::Type::MethodCall)
         .member("WatchState")?
-        .interface("com.system76.CosmicSettingsDaemon")?
+        .interface("com.lingmoos.LingmoSettingsDaemon")?
         .build();
     let state_stream = MessageStream::for_match_rule(state_rule, &conn, Some(100)).await?;
 
@@ -903,3 +903,6 @@ async fn watch_config_message_stream(
 
     Ok(())
 }
+
+
+

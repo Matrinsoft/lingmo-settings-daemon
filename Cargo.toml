@@ -1,5 +1,5 @@
 [package]
-name = "cosmic-settings-daemon"
+name = "lingmo-settings-daemon"
 version = "0.1.0"
 edition = "2024"
 license = "GPL-3.0-or-later"
@@ -11,9 +11,9 @@ members = [
     "audio-core",
     "audio-server",
     "config",
-    "cosmic-settings-daemon-config",
+    "lingmo-settings-daemon-config",
     "geonames",
-    "cosmic-pipewire",
+    "lingmo-pipewire",
     "varlink-server",
 ]
 
@@ -33,7 +33,7 @@ cosmic-comp-config = { git = "https://github.com/Matrinsoft/lingmo-comp" }
 cosmic-config.workspace = true
 cosmic-dbus-a11y = { git = "https://github.com/Matrinsoft/dbus-settings-bindings" }
 cosmic-settings-audio-server = { path = "./audio-server" }
-cosmic-settings-daemon-config = { path = "./cosmic-settings-daemon-config", features = [
+lingmo-settings-daemon-config = { path = "./lingmo-settings-daemon-config", features = [
     "greeter",
 ] }
 cosmic-settings-varlink-server = { path = "./varlink-server" }
@@ -70,3 +70,4 @@ calloop-wayland-source = "0.4.1"
 # iced_futures = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
 # cosmic-config = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
 # cosmic-theme = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
+

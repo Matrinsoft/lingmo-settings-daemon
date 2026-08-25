@@ -2,7 +2,7 @@ use std::time::Duration;
 
 use cosmic_config::CosmicConfigEntry;
 use cosmic_dbus_a11y::*;
-use cosmic_settings_daemon_config::greeter;
+use lingmo_settings_daemon_config::greeter;
 
 pub fn sync_with_greeter() -> anyhow::Result<()> {
     log::trace!("syncing with greeter...");
@@ -49,3 +49,4 @@ pub fn sync_with_greeter() -> anyhow::Result<()> {
 
     Ok(())
 }
+

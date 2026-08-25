@@ -18,9 +18,9 @@ ifneq ($(VENDOR),0)
 	ARGS += --frozen
 endif
 
-BIN = cosmic-settings-daemon
-SYSTEM_ACTIONS_CONF = "$(DESTDIR)$(sharedir)/cosmic/com.system76.CosmicSettings.Shortcuts/v1/system_actions"
-POLKIT_RULE = "$(DESTDIR)$(sharedir)/polkit-1/rules.d/cosmic-settings-daemon.rules"
+BIN = lingmo-settings-daemon
+SYSTEM_ACTIONS_CONF = "$(DESTDIR)$(sharedir)/lingmo/com.lingmoos.LingmoSettings.Shortcuts/v1/system_actions"
+POLKIT_RULE = "$(DESTDIR)$(sharedir)/polkit-1/rules.d/lingmo-settings-daemon.rules"
 
 all: $(BIN)
 
@@ -36,7 +36,7 @@ $(BIN): Cargo.toml Cargo.lock src/main.rs vendor-check
 install:
 	install -Dm0755 "$(CARGO_TARGET_DIR)/$(TARGET)/$(BIN)" "$(DESTDIR)$(bindir)/$(BIN)"
 	install -Dm0644 "data/system_actions.ron" "$(SYSTEM_ACTIONS_CONF)"
-	install -Dm0644 "data/polkit-1/rules.d/cosmic-settings-daemon.rules" "$(POLKIT_RULE)"
+	install -Dm0644 "data/polkit-1/rules.d/lingmo-settings-daemon.rules" "$(POLKIT_RULE)"
 
 ## Cargo Vendoring
 

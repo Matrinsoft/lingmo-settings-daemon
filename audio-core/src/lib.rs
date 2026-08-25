@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use zlink::{ReplyError, introspect};
 
 #[derive(Debug, PartialEq, ReplyError, introspect::ReplyError)]
-#[zlink(interface = "com.system76.CosmicSettings.Audio")]
+#[zlink(interface = "com.lingmoos.LingmoSettings.Audio")]
 pub enum Error {
     IO { code: Option<i32>, why: String },
     ChannelSend,
@@ -293,3 +293,4 @@ mod tests {
         assert_eq!((id, volume, balance), (42, 75, Some(0.25)));
     }
 }
+

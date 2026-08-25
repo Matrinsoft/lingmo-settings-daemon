@@ -1,18 +1,18 @@
 use std::time::Duration;
 
 use anyhow::Context;
-use cosmic_comp_config::XkbConfig;
+use LINGMO_COMP_CONFIG::XkbConfig;
 use cosmic_config::{ConfigGet, ConfigSet};
 use tokio::sync::mpsc::Receiver;
 use tokio_stream::StreamExt;
 
-pub const COSMIC_COMP_ID: &str = "com.system76.CosmicComp";
-pub const COSMIC_COMP_XDG_KEY: &str = "xkb_config";
+pub const LINGMO_COMP_ID: &str = "com.lingmoos.LingmoComp";
+pub const LINGMO_COMP_XDG_KEY: &str = "xkb_config";
 
 pub async fn sync_locale1(mut rx: Receiver<()>) -> anyhow::Result<()> {
     let conn = zbus::Connection::system().await?;
     let proxy = locale1::locale1Proxy::new(&conn).await?;
-    let config = cosmic_config::Config::new(COSMIC_COMP_ID, 1)
+    let config = cosmic_config::Config::new(LINGMO_COMP_ID, 1)
         .context("Found no cosmic-comp configuration")?;
 
     let mut model_stream = proxy.receive_x11model_changed().await;
@@ -34,7 +34,7 @@ pub async fn sync_locale1(mut rx: Receiver<()>) -> anyhow::Result<()> {
     .await;
 
     // Sync on startup only if the xkb config is not set.
-    if config.get::<XkbConfig>(COSMIC_COMP_XDG_KEY).is_err() {
+    if config.get::<XkbConfig>(LINGMO_COMP_XDG_KEY).is_err() {
         _ = sync_locale1_to_cosmic(&config, &proxy).await;
     } else {
         _ = sync_cosmic_to_locale1(&config, &proxy).await;
@@ -64,7 +64,7 @@ async fn sync_cosmic_to_locale1(
     proxy: &locale1::locale1Proxy<'_>,
 ) -> anyhow::Result<()> {
     let xkb_config = config
-        .get::<XkbConfig>(COSMIC_COMP_XDG_KEY)
+        .get::<XkbConfig>(LINGMO_COMP_XDG_KEY)
         .context("xkb-config not set")?;
 
     proxy
@@ -94,7 +94,7 @@ async fn sync_locale1_to_cosmic(
     .context("failed to get xkb config from locale1 daemon")?;
 
     let current_config = config
-        .get::<XkbConfig>(COSMIC_COMP_XDG_KEY)
+        .get::<XkbConfig>(LINGMO_COMP_XDG_KEY)
         .unwrap_or_default();
 
     let new_config = XkbConfig {
@@ -113,7 +113,9 @@ async fn sync_locale1_to_cosmic(
     }
 
     config
-        .set::<XkbConfig>(COSMIC_COMP_XDG_KEY, new_config)
+        .set::<XkbConfig>(LINGMO_COMP_XDG_KEY, new_config)
         .context("Failed to update xkb_config from systemd-localed")?;
     Ok(())
 }
+
+

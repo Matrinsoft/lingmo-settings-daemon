@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 #[cfg(feature = "greeter")]
 pub mod greeter;
 
-pub const NAME: &str = "com.system76.CosmicSettingsDaemon";
+pub const NAME: &str = "com.lingmoos.LingmoSettingsDaemon";
 
 /// Config structure for settings managed by the daemon
 #[derive(Default, Debug, Deserialize, Serialize, Clone, CosmicConfigEntry)]
@@ -35,3 +35,4 @@ impl CosmicSettingsDaemonState {
         Config::new_state(NAME, Self::VERSION)
     }
 }
+

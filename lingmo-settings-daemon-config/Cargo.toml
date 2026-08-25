@@ -1,5 +1,5 @@
 [package]
-name = "cosmic-settings-daemon-config"
+name = "lingmo-settings-daemon-config"
 version = "0.1.0"
 edition = "2024"
 

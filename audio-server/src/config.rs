@@ -1,6 +1,6 @@
 use cosmic_config::{Config as CosmicConfig, ConfigGet};
 
-const AUDIO_CONFIG: &str = "com.system76.CosmicAudio";
+const AUDIO_CONFIG: &str = "com.lingmoos.LingmoAudio";
 const AMPLIFICATION_SINK: &str = "amplification_sink";
 const VOLUME_STEP: &str = "volume_step";
 
@@ -26,3 +26,4 @@ pub async fn volume_step() -> u32 {
         }
     }
 }
+

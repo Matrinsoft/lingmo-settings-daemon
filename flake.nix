@@ -1,5 +1,5 @@
 {
-  description = "Settings daemon for the COSMIC desktop environment";
+  description = "Settings daemon for the Lingmo desktop environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -37,18 +37,18 @@
         };
 
         cargoArtifacts = craneLib.buildDepsOnly pkgDef;
-        cosmic-settings-daemon = craneLib.buildPackage (pkgDef // {
+        lingmo-settings-daemon = craneLib.buildPackage (pkgDef // {
           inherit cargoArtifacts;
         });
       in {
         checks = {
-          inherit cosmic-settings-daemon;
+          inherit lingmo-settings-daemon;
         };
 
-        packages.default = cosmic-settings-daemon;
+        packages.default = lingmo-settings-daemon;
 
         apps.default = flake-utils.lib.mkApp {
-          drv = cosmic-settings-daemon;
+          drv = lingmo-settings-daemon;
         };
 
         devShells.default = pkgs.mkShell {

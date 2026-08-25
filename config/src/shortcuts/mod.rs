@@ -18,7 +18,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashMap};
 use xkbcommon::xkb;
 
-pub const ID: &str = "com.system76.CosmicSettings.Shortcuts";
+pub const ID: &str = "com.lingmoos.LingmoSettings.Shortcuts";
 
 pub type SystemActions = BTreeMap<action::System, String>;
 
@@ -73,7 +73,7 @@ pub fn system_actions(context: &cosmic_config::Config) -> SystemActions {
     config
 }
 
-/// cosmic-config configuration state for `com.system76.CosmicSettings.Shortcuts`
+/// cosmic-config configuration state for `com.lingmoos.LingmoSettings.Shortcuts`
 #[derive(Clone, Debug, Default, PartialEq, CosmicConfigEntry)]
 #[version = 1]
 pub struct Config {
@@ -269,3 +269,4 @@ impl<'de> Deserialize<'de> for SystemActionsImpl {
         deserializer.deserialize_map(SystemActionsMapVisitor)
     }
 }
+
