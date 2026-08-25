@@ -1,5 +1,5 @@
 [package]
-name = "cosmic-settings-audio-server"
+name = "lingmo-settings-audio-server"
 version = "1.0.0"
 edition = "2024"
 license = "GPL-3.0-only"
@@ -15,7 +15,7 @@ lingmo-settings-daemon-config = { path = "../lingmo-settings-daemon-config", fea
     "greeter",
 ] }
 lingmo-pipewire = { path = "../lingmo-pipewire" }
-cosmic-settings-audio-core = { path = "../audio-core" }
+lingmo-settings-audio-core = { path = "../audio-core" }
 serde = { version = "1.0.228", features = ["derive"] }
 tokio-util = { version = "0.7.18", features = ["codec"] }
 futures-util = { version = "0.3.32", features = ["sink"] }
@@ -24,4 +24,5 @@ dirs = "6.0.0"
 
 [dev-dependencies]
 zlink = { workspace = true, features = ["tokio", "tracing"] }
+
 

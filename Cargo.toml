@@ -32,11 +32,11 @@ chrono = "0.4.42"
 cosmic-comp-config = { git = "https://github.com/Matrinsoft/lingmo-comp" }
 cosmic-config.workspace = true
 cosmic-dbus-a11y = { git = "https://github.com/Matrinsoft/dbus-settings-bindings" }
-cosmic-settings-audio-server = { path = "./audio-server" }
+lingmo-settings-audio-server = { path = "./audio-server" }
 lingmo-settings-daemon-config = { path = "./lingmo-settings-daemon-config", features = [
     "greeter",
 ] }
-cosmic-settings-varlink-server = { path = "./varlink-server" }
+lingmo-settings-varlink-server = { path = "./varlink-server" }
 cosmic-theme.export = true
 cosmic-theme.workspace = true
 ddc-hi = "0.4.1"
@@ -70,4 +70,5 @@ calloop-wayland-source = "0.4.1"
 # iced_futures = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
 # cosmic-config = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
 # cosmic-theme = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
+
 
