@@ -48,7 +48,7 @@ mod wayland;
 pub static ID_COUNTER: AtomicU64 = AtomicU64::new(0);
 
 static DBUS_NAME: &str = "com.lingmoos.LingmoSettingsDaemon";
-static DBUS_PATH: &str = "/com/system76/CosmicSettingsDaemon";
+static DBUS_PATH: &str = "/com/lingmoos/LingmoSettingsDaemon";
 
 struct SettingsDaemon {
     /// Directly access varlink daemon methods within the DBus daemon.
@@ -100,13 +100,13 @@ impl Config {
         let id = id.replace('.', "/");
 
         ObjectPath::try_from(format!(
-            "/com/system76/CosmicSettingsDaemon/{cfg_type}/{id}/V{version}",
+            "/com/lingmoos/LingmoSettingsDaemon/{cfg_type}/{id}/V{version}",
         ))
         .unwrap_or_else(|_| {
             let next_id = ID_COUNTER.fetch_add(1, Ordering::SeqCst);
 
             ObjectPath::try_from(format!(
-                "/com/system76/CosmicSettingsDaemon/{cfg_type}/C{next_id}/V{version}",
+                "/com/lingmoos/LingmoSettingsDaemon/{cfg_type}/C{next_id}/V{version}",
             ))
             .unwrap()
         })
