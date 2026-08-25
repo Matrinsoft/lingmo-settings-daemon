@@ -1,7 +1,7 @@
 // Copyright 2026 System76 <info@system76.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-use cosmic_settings_audio_client::CosmicAudioProxy;
+use lingmo_settings_audio_client::CosmicAudioProxy;
 use futures_util::StreamExt;
 use tracing_subscriber::prelude::*;
 
@@ -24,7 +24,7 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with(log_layer)
         .init();
 
-    let mut client = cosmic_settings_audio_client::connect().await.unwrap();
+    let mut client = lingmo_settings_audio_client::connect().await.unwrap();
 
     println!(
         "default source: {:?}",
@@ -45,3 +45,4 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
+

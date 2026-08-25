@@ -5,7 +5,7 @@
 
 use cosmic_config::ConfigSet;
 use cosmic_pipewire::{self as pipewire, Direction, NodeProps, PortType, ProfileClass};
-use cosmic_settings_audio_core::{Event, EventV1};
+use lingmo_settings_audio_core::{Event, EventV1};
 use cosmic_settings_daemon_config::{CosmicSettingsDaemonConfig, CosmicSettingsDaemonState};
 use futures_util::{SinkExt, StreamExt};
 use intmap::IntMap;
@@ -63,7 +63,7 @@ pub struct Model {
     /// Maps node IDs to their corresponding device IDs (if they have one).
     node_devices: IntMap<NodeId, DeviceId>,
     /// Information about nodes that are shared with subscribed varlink clients.
-    node_info: IntMap<NodeId, cosmic_settings_audio_core::NodeInfo>,
+    node_info: IntMap<NodeId, lingmo_settings_audio_core::NodeInfo>,
     /// Track mute status of nodes.
     pub node_mute: IntMap<NodeId, bool>,
     /// Track volume and volume balance of nodes.
@@ -78,7 +78,7 @@ pub struct Model {
     /** Playback stream information */
 
     /// Information about playback streams shared with subscribed varlink clients.
-    pub playback_info: IntMap<NodeId, cosmic_settings_audio_core::PlaybackInfo>,
+    pub playback_info: IntMap<NodeId, lingmo_settings_audio_core::PlaybackInfo>,
     /// Raw PipeWire `target.object` values for playback streams.
     playback_targets: IntMap<NodeId, String>,
     /// Resolved sink node IDs for playback streams with explicit targets.
@@ -87,7 +87,7 @@ pub struct Model {
     /** Device object information */
 
     /// Information about devices that are shared with subscribed varlink clients.
-    device_info: IntMap<DeviceId, cosmic_settings_audio_core::DeviceInfo>,
+    device_info: IntMap<DeviceId, lingmo_settings_audio_core::DeviceInfo>,
     /// All known device profiles that devices can be assigned.
     device_profiles: IntMap<DeviceId, Vec<pipewire::Profile>>,
     /// Tracking headset and headphone profiles
@@ -947,7 +947,7 @@ impl Model {
 
             pipewire::Event::AddDevice(device) => {
                 tracing::debug!(target: "audio-backend", "Device {} added: {}", device.id, device.description);
-                let info = cosmic_settings_audio_core::DeviceInfo {
+                let info = lingmo_settings_audio_core::DeviceInfo {
                     name: device.name,
                     description: device.description,
                     icon_name: device.icon_name,
@@ -971,7 +971,7 @@ impl Model {
                     self.node_devices.insert(node.object_id, device_id);
                 }
 
-                let info = cosmic_settings_audio_core::NodeInfo {
+                let info = lingmo_settings_audio_core::NodeInfo {
                     name: node.node_name.clone(),
                     description: node.description,
                     device_profile_description: node.device_profile_description,
@@ -1038,7 +1038,7 @@ impl Model {
                             return;
                         };
 
-                        let info = cosmic_settings_audio_core::PlaybackInfo {
+                        let info = lingmo_settings_audio_core::PlaybackInfo {
                             application_id: playback.application_id,
                             application_name: playback.application_name,
                             icon_name: playback.icon_name,
@@ -1348,16 +1348,16 @@ pub async fn pactl_set_default_source(node_name: &str) {
 
 pub fn pipewire_profile_to_cosmic(
     profile: &cosmic_pipewire::Profile,
-) -> cosmic_settings_audio_core::ProfileInfo {
-    cosmic_settings_audio_core::ProfileInfo {
+) -> lingmo_settings_audio_core::ProfileInfo {
+    lingmo_settings_audio_core::ProfileInfo {
         name: profile.name.clone(),
         description: profile.description.clone(),
         index: profile.index as u32,
         priority: profile.priority as u32,
         availability: match profile.available {
-            Availability::No => cosmic_settings_audio_core::Availability::No,
-            Availability::Yes => cosmic_settings_audio_core::Availability::Yes,
-            Availability::Unknown => cosmic_settings_audio_core::Availability::Unknown,
+            Availability::No => lingmo_settings_audio_core::Availability::No,
+            Availability::Yes => lingmo_settings_audio_core::Availability::Yes,
+            Availability::Unknown => lingmo_settings_audio_core::Availability::Unknown,
         },
         classes: profile
             .classes
@@ -1366,12 +1366,12 @@ pub fn pipewire_profile_to_cosmic(
             .map(|class| match class {
                 cosmic_pipewire::ProfileClass::AudioSink {
                     card_profile_devices,
-                } => cosmic_settings_audio_core::ProfileClass::AudioSink {
+                } => lingmo_settings_audio_core::ProfileClass::AudioSink {
                     card_profile_devices,
                 },
                 cosmic_pipewire::ProfileClass::AudioSource {
                     card_profile_devices,
-                } => cosmic_settings_audio_core::ProfileClass::AudioSource {
+                } => lingmo_settings_audio_core::ProfileClass::AudioSource {
                     card_profile_devices,
                 },
             })
@@ -1381,8 +1381,8 @@ pub fn pipewire_profile_to_cosmic(
 
 pub fn pipewire_route_to_cosmic(
     route: &cosmic_pipewire::Route,
-) -> cosmic_settings_audio_core::RouteInfo {
-    cosmic_settings_audio_core::RouteInfo {
+) -> lingmo_settings_audio_core::RouteInfo {
+    lingmo_settings_audio_core::RouteInfo {
         name: route.name.clone(),
         description: route.description.clone(),
         port_type: format!("{:?}", route.port_type),
@@ -1394,10 +1394,11 @@ pub fn pipewire_route_to_cosmic(
         device: route.device as u32,
         profile: route.card_profile_port as u32,
         availability: match route.available {
-            Availability::No => cosmic_settings_audio_core::Availability::No,
-            Availability::Yes => cosmic_settings_audio_core::Availability::Yes,
-            Availability::Unknown => cosmic_settings_audio_core::Availability::Unknown,
+            Availability::No => lingmo_settings_audio_core::Availability::No,
+            Availability::Yes => lingmo_settings_audio_core::Availability::Yes,
+            Availability::Unknown => lingmo_settings_audio_core::Availability::Unknown,
         },
         is_sink: matches!(route.direction, Direction::Output),
     }
 }
+

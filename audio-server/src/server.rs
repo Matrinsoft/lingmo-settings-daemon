@@ -3,7 +3,7 @@
 
 //! Interfaces for implementing the varlink methods for `com.lingmoos.LingmoSettings.Audio`.
 
-use cosmic_settings_audio_core::{Error, Mute, Node, Volume};
+use lingmo_settings_audio_core::{Error, Mute, Node, Volume};
 use std::os::fd::OwnedFd;
 use std::sync::Arc;
 
@@ -389,4 +389,5 @@ mod tests {
         assert_eq!(round_down(56, 5), 55);
     }
 }
+
 

@@ -3,7 +3,7 @@
 
 #![allow(deprecated)]
 
-use cosmic_settings_audio_core::{Event, EventV1};
+use lingmo_settings_audio_core::{Event, EventV1};
 use tokio_util::bytes::Buf;
 
 const MAX: usize = 8 * 1024 * 1024;
@@ -100,3 +100,4 @@ impl From<std::io::Error> for Error {
         Self::IO(error)
     }
 }
+

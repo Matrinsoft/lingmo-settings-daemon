@@ -7,7 +7,7 @@ pub mod codec;
 pub use zlink;
 use zlink::Connection;
 
-pub use cosmic_settings_audio_core::*;
+pub use lingmo_settings_audio_core::*;
 use std::os::fd::OwnedFd;
 use std::path::PathBuf;
 
@@ -153,4 +153,5 @@ pub trait CosmicAudioProxy {
         sink_id: u32,
     ) -> zlink::Result<Result<(), Error>>;
 }
+
 

@@ -52,7 +52,7 @@ static DBUS_PATH: &str = "/com/system76/CosmicSettingsDaemon";
 
 struct SettingsDaemon {
     /// Directly access varlink daemon methods within the DBus daemon.
-    varlink_daemon: Arc<tokio::sync::Mutex<cosmic_settings_varlink_server::DaemonInner>>,
+    varlink_daemon: Arc<tokio::sync::Mutex<lingmo_settings_varlink_server::DaemonInner>>,
     logind_session: Option<LogindSessionProxy<'static>>,
     a11y_session: Option<Mutex<cosmic_dbus_a11y::StatusProxy<'static>>>,
     display_brightness_device: BrightnessDevice,
@@ -497,7 +497,7 @@ async fn main() -> ExitCode {
 
     let result: zbus::Result<()> = task::LocalSet::new()
         .run_until(async move {
-            let (varlink_daemon, varlink_backend) = cosmic_settings_varlink_server::init().await;
+            let (varlink_daemon, varlink_backend) = lingmo_settings_varlink_server::init().await;
             let varlink_daemon_context = varlink_daemon.0.clone();
 
             task::spawn_local(async move {
@@ -903,6 +903,7 @@ async fn watch_config_message_stream(
 
     Ok(())
 }
+
 
 
 

@@ -8,8 +8,8 @@
 // - com.lingmoos.LingmoSettings.Display increase_brightness, decrease_brightness, set_brightness, recv_brightness,
 // - com.lingmoos.LingmoSettings.Keyboard increase_brightness, decrease_brightness, set_brightness, recv_brightness,
 
-use cosmic_settings_audio_core as audio;
-use cosmic_settings_audio_server as audio_server;
+use lingmo_settings_audio_core as audio;
+use lingmo_settings_audio_server as audio_server;
 use std::os::fd::OwnedFd;
 use std::path::PathBuf;
 use std::sync::Arc;
@@ -346,4 +346,5 @@ where
 pub struct DaemonInner {
     pub audio_server: audio_server::Server,
 }
+
 
