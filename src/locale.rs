@@ -1,7 +1,7 @@
 use std::time::Duration;
 
 use anyhow::Context;
-use LINGMO_COMP_CONFIG::XkbConfig;
+use cosmic_comp_config::XkbConfig;
 use cosmic_config::{ConfigGet, ConfigSet};
 use tokio::sync::mpsc::Receiver;
 use tokio_stream::StreamExt;

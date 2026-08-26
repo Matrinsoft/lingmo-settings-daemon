@@ -10,7 +10,7 @@ use cctk::sctk::{self};
 use cctk::wayland_client::globals::registry_queue_init;
 use cctk::wayland_client::protocol::{wl_keyboard, wl_seat};
 use cctk::wayland_client::{Connection, QueueHandle, delegate_noop};
-use LINGMO_COMP_CONFIG::XkbConfig;
+use cosmic_comp_config::XkbConfig;
 use cosmic_config::ConfigGet;
 use std::thread;
 
@@ -25,13 +25,13 @@ pub fn run() -> calloop::channel::Sender<Cmd> {
     sender
 }
 
-const LINGMO_COMP_CONFIG: &str = "com.lingmoos.LingmoComp";
-const LINGMO_COMP_CONFIG_VERSION: u64 = 1;
+const cosmic_comp_config: &str = "com.lingmoos.LingmoComp";
+const cosmic_comp_config_VERSION: u64 = 1;
 const XKB_CONFIG_KEY: &str = "xkb_config";
 
 fn xkb_config() -> Option<XkbConfig> {
     let config =
-        cosmic_config::Config::new(LINGMO_COMP_CONFIG, LINGMO_COMP_CONFIG_VERSION).unwrap();
+        cosmic_config::Config::new(cosmic_comp_config, cosmic_comp_config_VERSION).unwrap();
 
     match config.get(XKB_CONFIG_KEY) {
         Ok(xkb) => Some(xkb),
