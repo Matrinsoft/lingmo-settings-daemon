@@ -114,7 +114,7 @@ impl Server {
 
     pub async fn set_mono(&mut self, enabled: bool) -> Result<(), Error> {
         self.backend.model.lock().await.pipewire_send(
-            cosmic_pipewire::Request::SetMetadataProperty {
+            lingmo_pipewire::Request::SetMetadataProperty {
                 name: "sm-settings".to_owned(),
                 subject: 0,
                 key: "node.features.audio.mono".to_owned(),
@@ -288,7 +288,7 @@ impl Server {
             .get(sink_id)
             .ok_or(Error::InvalidSink)?;
 
-        model.pipewire_send(cosmic_pipewire::Request::SetMetadataProperty {
+        model.pipewire_send(lingmo_pipewire::Request::SetMetadataProperty {
             name: "default".to_owned(),
             subject: playback_id,
             key: "target.object".to_owned(),
@@ -313,7 +313,7 @@ fn set_node_mute(
         model.source_mute = mute;
     }
 
-    model.pipewire_send(cosmic_pipewire::Request::SetNodeMute(node_id, mute));
+    model.pipewire_send(lingmo_pipewire::Request::SetNodeMute(node_id, mute));
 
     Ok(Mute { id: node_id, mute })
 }
@@ -336,7 +336,7 @@ fn set_node_volume(
         model.source_volume = volume;
     }
 
-    model.pipewire_send(cosmic_pipewire::Request::SetNodeVolume(
+    model.pipewire_send(lingmo_pipewire::Request::SetNodeVolume(
         node_id,
         volume as f32 / 100.0,
         balance,

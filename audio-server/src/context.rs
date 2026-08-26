@@ -31,7 +31,7 @@ impl Context {
             let sender = Arc::new((Mutex::new(Vec::new()), tokio::sync::Notify::const_new()));
             let receiver = sender.clone();
 
-            cosmic_pipewire::run(
+            lingmo_pipewire::run(
                 move |event| {
                     sender.0.lock().unwrap().push(event);
                     sender.1.notify_one();

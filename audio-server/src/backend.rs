@@ -4,9 +4,9 @@
 #![allow(deprecated)]
 
 use cosmic_config::ConfigSet;
-use cosmic_pipewire::{self as pipewire, Direction, NodeProps, PortType, ProfileClass};
+use lingmo_pipewire::{self as pipewire, Direction, NodeProps, PortType, ProfileClass};
 use lingmo_settings_audio_core::{Event, EventV1};
-use cosmic_settings_daemon_config::{CosmicSettingsDaemonConfig, CosmicSettingsDaemonState};
+use lingmo_settings_daemon_config::{CosmicSettingsDaemonConfig, CosmicSettingsDaemonState};
 use futures_util::{SinkExt, StreamExt};
 use intmap::IntMap;
 use pipewire::Availability;
@@ -1347,7 +1347,7 @@ pub async fn pactl_set_default_source(node_name: &str) {
 }
 
 pub fn pipewire_profile_to_cosmic(
-    profile: &cosmic_pipewire::Profile,
+    profile: &lingmo_pipewire::Profile,
 ) -> lingmo_settings_audio_core::ProfileInfo {
     lingmo_settings_audio_core::ProfileInfo {
         name: profile.name.clone(),
@@ -1364,12 +1364,12 @@ pub fn pipewire_profile_to_cosmic(
             .iter()
             .cloned()
             .map(|class| match class {
-                cosmic_pipewire::ProfileClass::AudioSink {
+                lingmo_pipewire::ProfileClass::AudioSink {
                     card_profile_devices,
                 } => lingmo_settings_audio_core::ProfileClass::AudioSink {
                     card_profile_devices,
                 },
-                cosmic_pipewire::ProfileClass::AudioSource {
+                lingmo_pipewire::ProfileClass::AudioSource {
                     card_profile_devices,
                 } => lingmo_settings_audio_core::ProfileClass::AudioSource {
                     card_profile_devices,
@@ -1380,7 +1380,7 @@ pub fn pipewire_profile_to_cosmic(
 }
 
 pub fn pipewire_route_to_cosmic(
-    route: &cosmic_pipewire::Route,
+    route: &lingmo_pipewire::Route,
 ) -> lingmo_settings_audio_core::RouteInfo {
     lingmo_settings_audio_core::RouteInfo {
         name: route.name.clone(),
