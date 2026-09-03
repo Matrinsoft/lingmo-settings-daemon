@@ -21,7 +21,6 @@ Package: lingmo-settings-daemon
 Architecture: amd64 arm64
 Depends:
   acpid,
-  adw-gtk3,
   lingmo-sound-theme,
   pulseaudio-utils,
   ${misc:Depends},
